@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="UTF-8">
+  <title>register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <script type="text/javascritp" src="../js/angular.min.js"></script>
+  <script type="text/javascript" src="../js/date.js"></script>
+</head>
+<body>
+  <div id="fullscreen_bg" class="fullscreen_bg"/>
+
+<div class="container">
+
+  <form class="form-signin" action="insert.php" method="POST">
+    <h1 class="form-signin-heading text-muted">สมัครสมาชิก</h1>
+    <input type="email" class="form-control" placeholder="ชื่อผู้ใช้งาน" name="username" id="email" maxlength="10" required autofocus>
+    <input type="password" class="form-control" placeholder="รหัสผ่าน" name="pass" id="pass" maxlength="20" required autofocus>
+    <input type="text" class="form-control" placeholder="ชื่อ - นามสกุล" name="name" id="name" maxlength="30" required autofocus>
+  
+    <input type="date" class="form-control" name="birthday" id="birthday" placeholder="วันเกิด 1/11/2015" required autofocus>
+    
+        <br><br>   
+    <p>เพศ <input type="radio" name="sex" value="M" required autofocus> ชาย
+    <input type="radio" name="sex" value="F"> หญิง</p>
+
+    <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="tel" id="name" maxlength="10" onKeyUp="if(isNaN(this.value)){ alert('กรุณากรอกตัวเลข'); this.value='';}" required autofocus>
+  
+    <textarea name="address" class="form-control" placeholder="ที่อยู่" id="address" cols="30" rows="3" maxlength="50" required autofocus></textarea>
+    <br>
+    <input type="text" maxlength="7" minlength="6" class="form-control" placeholder="ป้ายทะเบียน" name="carid" id="carid" maxlength="30" required autofocus><br>
+    <select name="car" class="form-control" >ดูทุกรุ่นหลัก</option>
+<option value="Accord" >รุ่น Accord    </option>
+<option value="Accord_Hybrid" >รุ่น Accord Hybrid    </option>
+<option value="Brio" >รุ่น Brio    </option>
+<option value="Brio_Amaze" >รุ่น Brio Amaze    </option>
+<option value="City" >รุ่น City    </option>
+<option value="Civic" >รุ่น Civic    </option>
+<option value="Civic_Hybrid" >รุ่น Civic Hybrid    </option>
+<option value="CR-V" >รุ่น CR-V    </option>
+<option value="CR-Z" >รุ่น CR-Z    </option>
+<option value="Freed" >รุ่น Freed    </option>
+<option value="HR-V" >รุ่น HR-V    </option>
+<option value="Jazz" >รุ่น Jazz    </option>
+<option value="Mobilio" >รุ่น Mobilio    </option>
+<option value="Odyssey" >รุ่น Odyssey    </option>
+<option value="Stepwgn_Spada" >รุ่น Stepwgn Spada</option>
+</select>
+<br><br>
+
+    <button class="btn btn-lg btn-primary" type="submit">
+      สมัครสมาชิก
+    </button>
+
+    <button type="reset" class="btn btn-danger btn-lg">ล้างข้อมูล</button>
+
+  </form>
+</div>
+</div>
+
+   
+
+
+
+
+</body>
+</html>

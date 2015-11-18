@@ -1,0 +1,159 @@
+
+  body p{
+  color: #EEEEEE;
+  font-size: 16px;  
+  }
+  .btn 
+  {
+   outline:0;
+   border:none;
+   border-top:none;
+   border-bottom:none;
+   border-left:none;
+   border-right:none;
+   box-shadow:inset 2px -3px rgba(0,0,0,0.15);
+  }
+  .btn:focus
+  {
+   outline:0;
+   -webkit-outline:0;
+   -moz-outline:0;
+  }
+  .fullscreen_bg {
+    /*position: fixed;*/
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url('../img/hondaLogo.gif');
+    background-repeat:repeat;
+  }
+  .form-signin {
+    max-width: 280px;
+    padding: 15px;
+    margin: 0 auto;
+      margin-top:50px;
+  }
+  .form-signin .form-signin-heading, .form-signin {
+    margin-bottom: 10px;
+  }
+  .form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: none;
+    border-left-style: solid;
+    border-color: #000;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-style: none;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-color: rgb(0,0,0);
+    border-top:1px solid rgba(0,0,0,0.08);
+  }
+  .form-signin textarea {
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: none;
+    border-left-style: solid;
+    border-color: #000;
+  }
+
+  .form-signin-heading {
+    color: #EEEEEE;
+    text-align: center;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+  }
+
+.jumbotron {
+	background-image: url('../img/hondaLogo.gif');
+    background-color: #111111;
+    color: #fff;
+    padding: 100px 25px;
+  }
+  .container-fluid {
+      padding: 60px 50px;
+  }
+  .bg-grey {
+      background-color: #f6f6f6;
+  }
+  .logo-small {
+      color: #CC0000;
+      font-size: 50px;
+  }
+  .logo {
+      color: #CC0000;
+      font-size: 200px;
+  }
+  .thumbnail {
+      padding: 0 0 15px 0;
+      border: none;
+      border-radius: 0;
+  }
+  .thumbnail img {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 10px;
+  }
+  .carousel-control.right, .carousel-control.left {
+      background-image: none;
+      color: #111111;
+  }
+  .carousel-indicators li {
+      border-color: #111111;
+  }
+  .carousel-indicators li.active {
+      background-color: #111111;
+  }
+
+  .navbar {
+      margin-bottom: 0;
+      background-color: #111111;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #111111 !important;
+      background-color: #fff !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #fff !important;
+  }
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+  }
