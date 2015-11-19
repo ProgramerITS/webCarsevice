@@ -298,10 +298,12 @@ echo '
 <?php 
 if($_SESSION['per']!='admin'){
 echo '<div class="container-fluid"><div class="row">
-  <BR><BR><BR><BR><BR><BR><BR>
+  <BR><BR><BR><BR><BR>
+
+  <BR><div id="services" class="container-fluid"><BR>
 </div>
 </div>
-<div id="services" class="container-fluid">
+
   <h2 class="text-center">ประวัติการเข้าเช็ค</h2>
   <h4></h4>
   <br>
