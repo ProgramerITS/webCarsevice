@@ -1,47 +1,52 @@
 <?php
-include "../connect.php";
-  session_start();
-	if($_SESSION['per']!='admin'){
-			header('Location: ./page.php');
-	}
 
+include "../connect.php";
+
+  session_start();
+  if($_SESSION['per']!='admin'){
+      header('Location: ./page.php');
+  }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
-<!--show  user-->
+<div class="container">
+  <!--show  user-->
 <div class="container">
 <div class="row">
-<p align="center"><font size="30">จัดการข้อมูล</font></p>
+ <p align="center"><font size="30">จัดการข้อมูล</font></p>
 <!--box search-->
 <form action="" method="get" accept-charset="utf-8" class="form-signin pull-right">
-	<div class="container">
+  <div class="container">
 
-	<div class="row ">
-	<div class="col-md-5 pull-right">
-	
+  <div class="row ">
+  <div class="col-md-5 pull-right">
+  
         <div class="col-md-15 pull-right">
-		       <span class="col-md-5">
-						<select name="option" class="form-control input-sm">
+           <span class="col-md-5">
+            <select name="option" class="form-control input-sm">
             <?php $chk = isset($_GET['option'])?$_GET['option']:'';?>
-						<option value="cus_name" <?php if($chk =='cus_name'){echo 'selected';} ?>>name</option>
-						<option value="cus_id"<?php if($chk=='cus_id'){echo 'selected';} ?>>ID</option>
-						<option value="tel"<?php if($chk=='tel'){echo 'selected';} ?>>tel</option>
-						</select>
-						</span>
-		       <div id="custom-search-input">
+            <option value="cus_name" <?php if($chk =='cus_name'){echo 'selected';} ?>>name</option>
+            <option value="cus_id"<?php if($chk=='cus_id'){echo 'selected';} ?>>ID</option>
+            <option value="tel"<?php if($chk=='tel'){echo 'selected';} ?>>tel</option>
+            </select>
+            </span>
+           <div id="custom-search-input">
 
                    <div class="input-group col-md-7 pull-right">
-						
+            
                     <input type="text" class="form-control input-sm pull-right"  name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : '';?>" placeholder="search" >
                     <span class="input-group-btn">
                         <button class="btn btn-info btn-sm" type="submit">
@@ -52,9 +57,9 @@ include "../connect.php";
             </div>
         </div>
         </div>
-	</div>
+  </div>
 </div>
-</form>	
+</form> 
 
 <table class="table table-striped">
 <thead>
@@ -69,33 +74,81 @@ include "../connect.php";
 
   $_SESSION['perv2']='admin';
   if(!empty($_GET['option'])&&!empty($_GET['search'])){
-  		$option = $_GET['option'];
-  		$se = $_GET['search'];
-  		$sql = "SELECT cus_id,cus_name,tel,permission,password FROM Customer WHERE $option LIKE '%$se%'";
+      $option = $_GET['option'];
+      $se = $_GET['search'];
+      $sql = "SELECT cus_id,cus_name,tel,permission,password FROM Customer WHERE $option LIKE '%$se%'";
   }else{
-  	$sql = 'SELECT cus_id,cus_name,tel,permission,password FROM Customer';
+    $sql = 'SELECT cus_id,cus_name,tel,permission,password FROM Customer';
   }
   $qr = $conn->prepare($sql);
   $qr->execute();
   $qr->bind_result($cus_id,$cus_name,$tel,$per,$pass);
   
-  	
+    
   
   while ($qr->fetch()) {
   if($per!='admin'){
   echo '<tr>';
-  echo '<td>'.$cus_id.'</td><td>'.$cus_name.'</td><td>'.$tel.'</td><td><a href="../login/conlogin.php?user='.$cus_id.'&pass='.$pass.'&per=admin">ตรวจเช็ค</a></td>';
+  echo '<td>'.$cus_id.'</td><td>'.$cus_name.'</td><td>'.$tel.'</td><td><a href="./edit_user.php?show&user='.$cus_id.'&pass='.$pass.'&per=admin">ตรวจเช็ค</a></td>';
   echo '</tr>';
 }
 }
 ?>
 
 </table>
-<button type="button" class="btn btn-primary pull-right" onclick="window.location.href='./page.php'">กลับ</button>
+ <button type="button" class="btn btn-primary pull-right" onclick="window.location.href='./page.php'">กลับ</button> 
 </div>
 </div>
 
-
-
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">ตรวจเช็ค</h4>
+        </div>
+        <div class="modal-body">
+          <?php 
+              $re = mysqli_query($conn,"SELECT registration FROM car WHERE cus_id='".$_GET['user']."'");
+              $row = mysqli_fetch_assoc($re);
+              echo "ทะเบียน : ".$row['registration'];
+          echo '<table class="table table-striped">
+          <thead>
+          <tr>
+          <th>วันที่เช็ค</th>
+          <th>เลขไมค์</th>
+          <th>ระยะห่างของวัน</th>
+          </tr>
+          </thead>';
+        $reg = $row['registration'];
+        $qr = mysqli_query($conn,"SELECT * FROM checkcar WHERE registration='$reg'");
+        while($row = mysqli_fetch_assoc($qr)){
+          echo '<tr>';
+            echo '<td>'.$row['date_'].'</td><td>'.$row['mile_late'].'</td><td>'.$row['countday'].'</td><td><a class="glyphicon glyphicon-remove" href="../function/del.php?reg='.$reg.'&date='.$row['date_'].'&user='.$_GET['user'].'&pass='.$_GET['pass'].'"></span></td>';
+            echo '</tr>';
+          }
+          echo'</table>';
+          ?>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+  <?php
+  if(isset($_GET['user'])&&isset($_GET['pass'])){
+      echo '<script type="text/javascript">
+            $(window).load(function(){
+                $(\'#myModal\').modal(\'show\');
+            });
+        </script>';
+        }?>
 </body>
 </html>

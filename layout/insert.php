@@ -7,7 +7,7 @@ $_SESSION['countdate'] = DateDiff($_SESSION['date2'], $_SESSION['date3']) ;
 $data = array(
 	"mild" => $_POST['mild'],
 	"date" => $_POST['date'],
-	"regis" => $_SESSION["regis"],
+	"regis" => $_POST["regis"],
 	"countdate"=>$_SESSION['countdate'],
 );
 $_SESSION["datelate"] = $_POST['date'];
@@ -19,7 +19,7 @@ ON checkcar.check_id=Car.car_id";
  */
 
 $sql = "INSERT INTO checkcar (registration, date_,mile_late)
- VALUES (?,?,?)";
+ VALUES (?,?,?) ";
 
 $qr = $conn->prepare($sql);
 if ($qr === false) {
@@ -28,6 +28,18 @@ if ($qr === false) {
 
 $qr->bind_param("ssi", $data["regis"], $data["date"], $data["mild"]);
 $qr->execute();
+$reg = $data["regis"];
+$result = mysql_query($conn,"SELECT * FROM checkcar WHERE registration=$reg");
+$i = 0;
+while ($row = mysql_fetch_assoc($result)) {
+	$ar[$i] = $row['date_'];
+	if($i%2==1){
+		echo DateDiff($ar[$i],$ar[$i-1]);
+	}
+}
+
+
+
 
 $qr->close();
 ?>

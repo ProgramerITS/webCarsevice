@@ -25,6 +25,13 @@ if (isset($see["name"])) {
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
   <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
 
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <style>
 .videoWrapper {
@@ -46,13 +53,13 @@ if (isset($see["name"])) {
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
 
-      <a href="#myPage"><img src="../img/logo-website.png" alt="" class="navbar-brand" ></a>
+ <a href="#myPage"><img src="../img/logo-website.png" alt="" class="navbar-brand" ></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -66,12 +73,14 @@ if (isset($see["name"])) {
 
       ?>
         <li><a href="<?php echo $redir;?>">หน้าแรก</a></li>
-        <li><a href="#services">ประวัติการเข้าเช็ค</a></li>
-        <li><a href="#Anticipate">การคาดการณ์</a></li>
+        <?php if($_SESSION['per']!='admin'){
+        echo '<li><a href ="#Anticipate">การคาดการณ์</a></li>';
+        echo '<li><a href="#services">ประวัติการเข้าเช็ค</a></li>';
+        }?>
         <?php if($_SESSION['per']=='admin'){
               echo '<li><a href="edit_user.php">จัดการ user</a></li>';
           }?>
-        <li><a href="destroy_session.php">ออกจากระบบ</a></li>
+        <li><a class="glyphicon glyphicon-log-out" href="destroy_session.php"> ออกจากระบบ</a></li>
 
       </ul>
     </div>
@@ -96,6 +105,7 @@ $date1 = $op->date;
     <button type="button" class="btn btn-danger">ค้นหา</button>
   </form> -->
 </div>
+<?php if($_SESSION['per']!='admin'){ echo '
 <!-- Container (Anticipate Section) -->
 <div id="Anticipate" class="container-fluid text-center">
   <h2>การคาดการณ์</h2><br>
@@ -105,8 +115,8 @@ $date1 = $op->date;
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-hand-right logo"></span>
     </div>
-    <div class="col-sm-8">
-    <?php
+    <div class="col-sm-8">';
+
     $ck =  $_SESSION['countdate'] ;
      if(empty($_SESSION['countdate'])){ $_SESSION['countdate']='0';
    }else if(intval($ck)<0){
@@ -116,15 +126,15 @@ $date1 = $op->date;
        //echo $sql;
    
 
-     ?>
+     echo'
       <h2>ตรวจเช็คสภาพครั้งต่อไป</h2>
-      <h4><strong>วันที่ :</strong> <?php echo DateDiffP("$date1", $nextd);?></h4>
-      <h5><strong>อีกประมาณ :</strong><?php echo $_SESSION['countdate']. " ";?>วัน</h5>
+      <h4><strong>วันที่ :</strong> '.DateDiffP("$date1", $nextd).'</h4>
+      <h5><strong>อีกประมาณ :</strong>'.$_SESSION['countdate'].'วัน</h5>
       
     </div>
   </div>
 </div>
-    </div>
+    </div>';}?>
 
 
 <!-- Container (Chack Section) -->
@@ -140,6 +150,9 @@ echo '
       <h2>เช็คระยะทาง</h2>
 
 <div ng-controller="DatepickerDemoCtrl">
+    <div class="row"><div class="col-md-6"> <h4>เลขทะเบียน</h4> <input type="text" name="regis" class="form-control" id="tags" placeholder="เลขทะเบียนรถยนตน์" maxlength="7" minlength="6" required autofocus>
+      </div></div><br>
+
     <h4>ระยะทาง</h4>
     <div class="row">
         <div class="col-md-6">
@@ -147,7 +160,7 @@ echo '
              	<option >โปรดเลือก</option>';
               
               $num = $op->mile();
-              for($i=0;$i<10;$i++){ 
+              for($i=0;$i<100;$i++){ 
                 $num = $num+1000;
              	  echo '<option value="'.$num.'">'.$num.' ไมล์</option>';
                 
@@ -173,9 +186,12 @@ echo '
     <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">เคลียร์</button>
 
 </div>
-    <hr />
+    ';
+      
 
-      <input type="submit" class="btn btn-default btn-lg" value="บันทึก">
+
+      
+      echo '<br><br><hr><input type="submit" class="btn btn-default btn-lg" value="บันทึก">
       <input type="reset" class="btn btn-default btn-lg" value="ล้างค่า">
     </div>
     <div class="col-sm-4">
@@ -183,14 +199,20 @@ echo '
     </div>
   </div>
 </div>
-</form>';}?>
+</form>';
+
+
+}?>
 
 
 
 
 <!-- Container (Services Section) -->
-<div id="services" class="container-fluid text-center">
-  <h2>ประวัติการเข้าเช็ค</h2>
+<?php 
+if($_SESSION['per']!='admin'){
+echo '
+<div id="services" class="container-fluid">
+  <h2 class="text-center">ประวัติการเข้าเช็ค</h2>
   <h4></h4>
   <br>
  <div class="container-fluid bg-grey">
@@ -199,7 +221,7 @@ echo '
 
   	<div class="col-sm-12">
     <div class="videoWrapper">
-        <iframe src=" ../grap.php?carid=<?php echo $_SESSION["regis"];?>" frameborder="0" allowfullscreen></iframe>
+        <iframe src=" ../grap.php?carid='.$_SESSION["regis"].'" frameborder="0" allowfullscreen></iframe>
      </div>
 	  <table class="table">
     <tr>
@@ -208,8 +230,8 @@ echo '
         <th>ระยะทาง</th>
        <th>ทะเบียน</th>
       </tr>
-
-      <?php
+      ';
+      
 $sql = "SELECT date_, mile_late ,registration,check_id FROM checkcar WHERE registration='$registration'";
 	$qr = $conn->prepare($sql);
 	$qr->execute();
@@ -219,15 +241,15 @@ $sql = "SELECT date_, mile_late ,registration,check_id FROM checkcar WHERE regis
 	while ($qr->fetch()) {
 		  $ar[$i]= $ck;
       $i++;
-		?>
-      <tr class="success">
-        <td><?php echo $i;?></td>
-        <td><?php echo $date_;?></td>
-        <td><?php echo $mile_late;?></td>
-        <td><?php echo $registration;?><br></td>
-      </tr>
+		echo '<tr class="success">';
+       echo "<td>$i</td>";
+        echo "<td>$date_</td>";
+         echo "<td>$mile_late</td>";
+         echo "<td>$registration<br></td>";
+       echo "</tr>";
 
-    <?php
+   
+}
 }
 	?>
     </table>
@@ -244,7 +266,23 @@ $sql = "SELECT date_, mile_late ,registration,check_id FROM checkcar WHERE regis
 
 
   </div>
+  <script>
+  $(function() {
+    var availableTags = [
+     <?php
+     $re = mysqli_query($conn,"SELECT registration FROM car");
+      while ($row = mysqli_fetch_assoc($re)){
+     echo '"'.$row['registration'].'",';
+   }
 
+     ?>
+      " "
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
 
 </body>
 </html>

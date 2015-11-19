@@ -47,6 +47,26 @@ class db
 		$this->date=$ar[count($ar)-1];
 		return $da[count($da)-1];
 	}
+	public function updatecar($reg=''){
+				include "../connect.php";
+				$sql = "SELECT * FROM checkcar WHERE registration='$reg'";
+				$res = mysqli_query($conn,$sql);
+				$i = 0;
+				
+				while ($row = mysqli_fetch_assoc($res)) {
+				$ar[$i] = $row['date_'];
+				
+				if($i>0){
+				$d = (int)DateDiff($ar[$i],$ar[$i-1]);
+				$a = $ar[$i];
+				if($d<0){
+				$d=$d*-1;
+				}
+				// echo $d;
+				mysqli_query($conn,"UPDATE checkcar SET countday='$d' WHERE registration='$reg' AND date_='$a'");
+				}
+				$i++;
+}}
 
 }
 
@@ -95,6 +115,10 @@ $_SESSION['date3'] = $ar[1];
 
 
 $registration=$_SESSION['regis'];
+
+//<-update car
+	$op->updatecar($registration);
+//->
 $sql = "SELECT countday,check_id FROM checkcar WHERE registration='$registration'";
 $q = $conn->prepare($sql);
 $q->execute();
@@ -107,6 +131,7 @@ while ($q->fetch()) {
 	$i++;
 	
 }
+
 $_SESSION['countdate'] = round($sum/($i-1))-1;
  $dd =$a[count($a)-1];
  $ss=  DateDiff($_SESSION['date2'], $_SESSION['date3']) ;
