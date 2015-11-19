@@ -119,6 +119,7 @@ $registration=$_SESSION['regis'];
 //<-update car
 	$op->updatecar($registration);
 //->
+if($_SESSION['per']!='admin'){	
 $sql = "SELECT countday,check_id FROM checkcar WHERE registration='$registration'";
 $q = $conn->prepare($sql);
 $q->execute();
@@ -138,7 +139,7 @@ $_SESSION['countdate'] = round($sum/($i-1))-1;
  $sql = "UPDATE checkcar SET countday='$ss' WHERE check_id='$dd' ";
  mysqli_query($conn,$sql);
 
-
+}
 
 
 // print_r($ar);

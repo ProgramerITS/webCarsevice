@@ -229,13 +229,14 @@ echo '
         <th>วันที่</th>
         <th>ระยะทาง</th>
        <th>ทะเบียน</th>
+       <th>ระยะห่างของวันที่</th>
       </tr>
       ';
       
-$sql = "SELECT date_, mile_late ,registration,check_id FROM checkcar WHERE registration='$registration'";
+$sql = "SELECT date_, mile_late ,registration,check_id,countday FROM checkcar WHERE registration='$registration'";
 	$qr = $conn->prepare($sql);
 	$qr->execute();
-	$qr->bind_result($date_, $mile_late,$registration,$ck);
+	$qr->bind_result($date_, $mile_late,$registration,$ck,$countday);
 
 	$i = 0;
 	while ($qr->fetch()) {
@@ -246,6 +247,7 @@ $sql = "SELECT date_, mile_late ,registration,check_id FROM checkcar WHERE regis
         echo "<td>$date_</td>";
          echo "<td>$mile_late</td>";
          echo "<td>$registration<br></td>";
+         echo "<td>$countday<br></td>";
        echo "</tr>";
 
    
