@@ -156,6 +156,46 @@ function DateDiffP($strDate1, $value) {
 function DateDiff($strDate1, $strDate2) {
 	return intval((strtotime($strDate1) - strtotime($strDate2)) / (60 * 60 * 24)); // 1 day = 60*60*24
 }
+
+
+$_SESSION['mile']=((int)$op->mile())+10000;
+
+    	$mile=$_SESSION['mile'];
+      	$mony = 0;
+      	$sum=0;
+        if($mile%20000==1){
+          
+           $mony+=1000;
+          
+           $mony+=120;
+           $sum=$sum+2;
+           if($mile%30000==0){
+             $sum=$sum+1;
+           	 $mony+=520;
+           }
+        }else{
+          
+           $mony+=1000;
+           $mony+=120;
+           $sum=$sum+2;
+           
+           if($mile%60000==0){
+             $sum=$sum+2;
+           	 $mony+=180;
+           	 $mony+=170;
+           }
+           if($mile%80000==0){
+           	   	 $mony+=320;
+           	   	 $sum=$sum+1;
+           }	
+        }
+        $_SESSION['xx']=$sum;
+      		
+      
+
+
+
+
 ?>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

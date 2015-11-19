@@ -47,6 +47,10 @@ if (isset($see["name"])) {
   width: 100%;
   height: 100%;
 }
+.modal-content{
+  position:relative;
+  margin-top: 100px;
+}
 </style>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -130,13 +134,96 @@ $date1 = $op->date;
       <h2>ตรวจเช็คสภาพครั้งต่อไป</h2>
       <h4><strong>วันที่ :</strong> '.DateDiffP("$date1", $nextd).'</h4>
       <h5><strong>อีกประมาณ :</strong>'.$_SESSION['countdate'].'วัน</h5>
+      <div class="col-sm-8 text-right">
+  จำนวน '.$sum.' รายการ ราคา '.$mony.' บาท
+
+  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">รายละเอียด</button>
+
+  <!-- Modal -->
+  <div class="modal fade text-left" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+
+      <div class="modal-content col-sm-8">
+        <div class="modal-footer">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>อะไหร่</th>
+        <th>ราคา</th>
+        </tr>
+    </thead>
+    <tbody>';
+
+      $mile=$_SESSION['mile'];
+        //$mony = 0;
+        if($mile%20000==1){
+           echo '<tr>';
+           echo "<td>น้ำมันเครือง</td><td>1000</td><td>บาท</td>";
+           //$mony+=1000;
+           echo '</tr>';
+           echo '<tr>';
+           echo "<td>น็อตแหวนนำ้มันเครือง</td><td>120</td><td>บาท</td>";
+           //$mony+=120;
+           echo '</tr>';
+           if($mile%30000==0){
+             echo '<tr>';
+              echo "<td>กรองอากาศ</td><td>520</td><td>บาท</td>";
+             echo '</tr>';
+            // $mony+=520;
+           }
+        }else{
+           echo '</tr>';
+           echo "<td>น้ำมันเครือง</td><td>1000</td><td>บาท</td>";
+           //$mony+=1000;
+           echo '</tr>';
+           echo '<tr>';
+           echo "<td>น็อตแหวนนำ้มันเครือง</td><td>120</td><td>บาท</td>";
+           //$mony+=120;
+           echo '</tr>';
+           if($mile%60000==0){
+             echo '<tr>';
+              echo "<td>น้ำมันเบรก</td><td>180</td><td>บาท</td>";
+             echo '</tr>';
+             //$mony+=180;
+             echo '<tr>';
+              echo "<td>น้ำมันเกีย</td><td>170</td><td>บาท</td>";
+             echo '</tr>';
+             //$mony+=170;
+           }
+           if($mile%80000==0){
+             echo '<tr>';
+              echo "<td>กรองน้ำมันเชื้อเพลิง</td><td>320</td><td>บาท</td>";
+             echo '</tr>';
+             //$mony+=320;
+           }  
+        }
+          
       
+      echo "</tr><td class=\"text-right\">ราคารวม</td><td class=\"success\">$mony</td><td>บาท</td></tr>".'
+    </tbody>
+  </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
     </div>
   </div>
 </div>
     </div>';}?>
 
-
+  
 <!-- Container (Chack Section) -->
 
 <?php 
@@ -159,9 +246,9 @@ echo '
              <select class="form-control" name="mild" id="mild" required autofocus>
              	<option >โปรดเลือก</option>';
               
-              $num = $op->mile();
-              for($i=0;$i<100;$i++){ 
-                $num = $num+1000;
+              $num = 0;
+              for($i=0;$i<30;$i++){ 
+                $num = $num+10000;
              	  echo '<option value="'.$num.'">'.$num.' ไมล์</option>';
                 
               }
