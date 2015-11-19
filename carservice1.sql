@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2015 at 04:20 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Nov 19, 2015 at 10:49 AM
+-- Server version: 10.0.17-MariaDB
+-- PHP Version: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,51 +17,54 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `carservice`
+-- Database: `dbvdo09`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Anticipate`
+-- Table structure for table `anticipate`
 --
 
-CREATE TABLE IF NOT EXISTS `Anticipate` (
+CREATE TABLE `anticipate` (
   `anticipate_id` int(8) NOT NULL,
   `date_anti` date NOT NULL,
   `ex_future` int(10) NOT NULL,
   `check_id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `maintain_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `Anticipate`
+-- Dumping data for table `anticipate`
 --
 
-INSERT INTO `Anticipate` (`anticipate_id`, `date_anti`, `ex_future`, `check_id`, `maintain_id`) VALUES
+INSERT INTO `anticipate` (`anticipate_id`, `date_anti`, `ex_future`, `check_id`, `maintain_id`) VALUES
 (1, '0000-00-00', 0, '00001', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Car`
+-- Table structure for table `car`
 --
 
-CREATE TABLE IF NOT EXISTS `Car` (
+CREATE TABLE `car` (
   `registration` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `version` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `date_` date NOT NULL,
-  `mile_start` int(10) NOT NULL,
+  `mile_start` int(10) NOT NULL DEFAULT '0',
   `cus_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `Car`
+-- Dumping data for table `car`
 --
 
-INSERT INTO `Car` (`registration`, `version`, `date_`, `mile_start`, `cus_id`) VALUES
+INSERT INTO `car` (`registration`, `version`, `date_`, `mile_start`, `cus_id`) VALUES
 ('1กก', 'city', '2015-11-10', 0, 'surewat'),
-('1กง2533', 'city', '2015-07-20', 0, 'root');
+('1กง2532', 'city', '2015-11-10', 0, 'admin'),
+('1กง2533', 'city', '2015-07-20', 0, 'root'),
+('aaaaaaa', 'Accord', '2015-11-15', 0, 'its'),
+('ABC1234', 'CR-Z', '2015-11-11', 0, 'kig');
 
 -- --------------------------------------------------------
 
@@ -69,57 +72,60 @@ INSERT INTO `Car` (`registration`, `version`, `date_`, `mile_start`, `cus_id`) V
 -- Table structure for table `checkcar`
 --
 
-CREATE TABLE IF NOT EXISTS `checkcar` (
-  `check_id` int(5) unsigned zerofill NOT NULL,
+CREATE TABLE `checkcar` (
+  `check_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `registration` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `date_` date NOT NULL,
-  `mile_late` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `mile_late` int(10) NOT NULL,
+  `countday` int(5) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `checkcar`
 --
 
-INSERT INTO `checkcar` (`check_id`, `registration`, `date_`, `mile_late`) VALUES
-(00039, '1กง2533', '2015-11-09', 10000),
-(00040, '1กง2533', '2015-11-10', 20000),
-(00041, '1กง2533', '2015-11-27', 30000),
-(00042, '1กง2533', '2015-11-30', 50000),
-(00043, '1กก', '2015-11-09', 10000),
-(00044, '1กก', '2015-11-27', 20000);
+INSERT INTO `checkcar` (`check_id`, `registration`, `date_`, `mile_late`, `countday`) VALUES
+(00064, '1กง2533', '2015-11-19', 0, 0),
+(00065, '1กง2533', '2015-11-27', 0, 8),
+(00066, '1กง2533', '2015-11-30', 0, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Customer`
+-- Table structure for table `customer`
 --
 
-CREATE TABLE IF NOT EXISTS `Customer` (
+CREATE TABLE `customer` (
   `cus_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'รหัสลูกค้า',
   `cus_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ชื่อลูกค้า',
   `sex` varchar(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'เพศ F= หญิง M=ชาย',
   `tel` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'เบอร์โทร',
   `address` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ที่อยู่',
   `birthday` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+  `password` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `permission` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `Customer`
+-- Dumping data for table `customer`
 --
 
-INSERT INTO `Customer` (`cus_id`, `cus_name`, `sex`, `tel`, `address`, `birthday`, `password`) VALUES
-('root', 'surewat intharasuwan', 'F', '093029392', '21313', '3/2/2010', '123456'),
-('surewat', 'สุเรวัตร อินทรสุวรรณ์', 'M', '0923124124', '18/97 หมู่ 13 คลองหลวง ปทุมธานี', '8/4/1995', '123456789'),
-('surewat123', 'ssss sss', 'M', '0923124124', '22222', '09/2/1992', '123456');
+INSERT INTO `customer` (`cus_id`, `cus_name`, `sex`, `tel`, `address`, `birthday`, `password`, `permission`) VALUES
+('admin', 'kig kosa', 'M', '0874012863', 'sas', '1/1/2015', '123456', ''),
+('its', 'อังคาร  ไกรสินธุ์', 'M', '0874012863', 'asda', '2015-11-15', '123456', 'admin'),
+('kig', 'นายพิสุทธิ์  โกสยะมาศ', 'M', '0874012863', '32 m7', '1995-04-19', '123456', 'admin'),
+('root', 'surewat intharasuwan', 'F', '093029392', '21313', '3/2/2010', '123456', ''),
+('sad', 'นายพิสุทธิ์  โกสยะมาศ', 'M', '0874012863', '32 m7', '1995-04-19', 'asdasds', ''),
+('surewat', 'สุเรวัตร อินทรสุวรรณ์', 'M', '0923124124', '18/97 หมู่ 13 คลองหลวง ปทุมธานี', '8/4/1995', '123456789', 'admin'),
+('surewat123', 'base kkkk', 'M', '0923124124', '22222', '09/2/1992', '123456', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Employee`
+-- Table structure for table `employee`
 --
 
-CREATE TABLE IF NOT EXISTS `Employee` (
+CREATE TABLE `employee` (
   `emp_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'รหัส',
   `emp_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ชื่อ',
   `sex` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
@@ -133,10 +139,10 @@ CREATE TABLE IF NOT EXISTS `Employee` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Maintain`
+-- Table structure for table `maintain`
 --
 
-CREATE TABLE IF NOT EXISTS `Maintain` (
+CREATE TABLE `maintain` (
   `maintain_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `wage` int(6) NOT NULL,
   `expenses` int(6) NOT NULL
@@ -147,15 +153,15 @@ CREATE TABLE IF NOT EXISTS `Maintain` (
 --
 
 --
--- Indexes for table `Anticipate`
+-- Indexes for table `anticipate`
 --
-ALTER TABLE `Anticipate`
+ALTER TABLE `anticipate`
   ADD PRIMARY KEY (`anticipate_id`);
 
 --
--- Indexes for table `Car`
+-- Indexes for table `car`
 --
-ALTER TABLE `Car`
+ALTER TABLE `car`
   ADD PRIMARY KEY (`registration`);
 
 --
@@ -165,21 +171,21 @@ ALTER TABLE `checkcar`
   ADD PRIMARY KEY (`check_id`);
 
 --
--- Indexes for table `Customer`
+-- Indexes for table `customer`
 --
-ALTER TABLE `Customer`
+ALTER TABLE `customer`
   ADD PRIMARY KEY (`cus_id`);
 
 --
--- Indexes for table `Employee`
+-- Indexes for table `employee`
 --
-ALTER TABLE `Employee`
+ALTER TABLE `employee`
   ADD PRIMARY KEY (`emp_id`);
 
 --
--- Indexes for table `Maintain`
+-- Indexes for table `maintain`
 --
-ALTER TABLE `Maintain`
+ALTER TABLE `maintain`
   ADD PRIMARY KEY (`maintain_id`);
 
 --
@@ -187,15 +193,15 @@ ALTER TABLE `Maintain`
 --
 
 --
--- AUTO_INCREMENT for table `Anticipate`
+-- AUTO_INCREMENT for table `anticipate`
 --
-ALTER TABLE `Anticipate`
-  MODIFY `anticipate_id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+ALTER TABLE `anticipate`
+  MODIFY `anticipate_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `checkcar`
 --
 ALTER TABLE `checkcar`
-  MODIFY `check_id` int(5) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+  MODIFY `check_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
