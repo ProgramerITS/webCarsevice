@@ -2,6 +2,7 @@
 session_start();
 include "../function/function.php";
 include "../connect.php";
+
 $see = array(
 	"name" => $_SESSION["user"],
 );
@@ -93,6 +94,7 @@ if (isset($see["name"])) {
  <?php
 //$date1 = isset($_POST['date']) ? $_POST['date'] : '';
 $date1 = $op->date;
+$_SESSION['countdate'] = isset($_SESSION['countdate'])?$_SESSION['countdate']:'';
 //echo "sss=>" . $_SESSION["datelate"] . "<br>";
   $nextd = $_SESSION['countdate'];
   //echo $nextd;
@@ -237,8 +239,42 @@ echo '
       <h2>เช็คระยะทาง</h2>
 
 <div ng-controller="DatepickerDemoCtrl">
-    <div class="row"><div class="col-md-6"> <h4>เลขทะเบียน</h4> <input type="text" name="regis" class="form-control" id="tags" placeholder="เลขทะเบียนรถยนตน์" maxlength="7" minlength="6" required autofocus>
-      </div></div><br>
+    <div class="row"><div class="col-md-6"> <h4>เลขทะเบียน</h4> ';
+
+
+
+    //<input type="search" name="regis" class="form-control" id="tags" placeholder="เลขทะเบียนรถยนตน์" maxlength="7" minlength="6" required autofocus>
+      ?>
+<div id="custom-search-input">
+  <div class="input-group pull-right">
+<select name="regis" class="form-control">
+<?php
+$ssql ="SELECT registration FROM car";
+if(isset($_GET['search'])){
+  $s = $_GET['search'];
+  $ssql.=" WHERE registration='$s'";
+}
+
+
+
+$re = mysqli_query($conn, $ssql);
+      while ($row = mysqli_fetch_assoc($re)){
+        ?>
+  <option  value="<?php echo $row['registration'];?>"><?php echo $row['registration'];?></option>
+<?php } ?>
+</select>
+ <span class="input-group-btn">
+                        <button class="btn btn-info btn-md"  type="button" onclick="window.location.href='./edit_user.php'">
+                            <i   class="glyphicon glyphicon-search"></i>
+                         </button>
+                    </span>
+                </div>
+            </div>
+
+
+<?php 
+
+      echo '</div></div><br>
 
     <h4>ระยะทาง</h4>
     <div class="row">

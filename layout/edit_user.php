@@ -67,7 +67,9 @@ include "../connect.php";
         <th>ID</th>
         <th>ชื่อ</th>
         <th>เบอร์โทรศัพท์</th>
-        <th>ตรวจเช็ค</th>
+        <th>ป้ายทะเบียน</th>
+        <th>รายละเอียด</th>
+        <th>เพิ่มข้อมูล</th>
       </tr>
     </thead>
 <?php
@@ -76,22 +78,22 @@ include "../connect.php";
   if(!empty($_GET['option'])&&!empty($_GET['search'])){
       $option = $_GET['option'];
       $se = $_GET['search'];
-      $sql = "SELECT cus_id,cus_name,tel,permission,password FROM Customer WHERE $option LIKE '%$se%'";
+      $sql = "SELECT cus.cus_id,cus.cus_name,cus.tel,cus.permission,cus.password,car.registration FROM Customer  cus INNER JOIN car ON cus.cus_id=car.cus_id WHERE $option LIKE '%$se%'";
   }else{
-    $sql = 'SELECT cus_id,cus_name,tel,permission,password FROM Customer';
+    $sql = 'SELECT cus.cus_id,cus.cus_name,cus.tel,cus.permission,cus.password,car.registration FROM Customer cus INNER JOIN car ON cus.cus_id=car.cus_id';
   }
   $qr = $conn->prepare($sql);
   $qr->execute();
-  $qr->bind_result($cus_id,$cus_name,$tel,$per,$pass);
+  $qr->bind_result($cus_id,$cus_name,$tel,$per,$pass,$registration);
   
     
   
   while ($qr->fetch()) {
   if($per!='admin'){
   echo '<tr>';
-  echo '<td>'.$cus_id.'</td><td>'.$cus_name.'</td><td>'.$tel.'</td><td><a href="./edit_user.php?show&user='.$cus_id.'&pass='.$pass.'&per=admin">ตรวจเช็ค</a></td>';
+  echo '<td>'.$cus_id.'</td><td>'.$cus_name.'</td><td>'.$tel.'</td><td>'.$registration.'</td><td><a href="./edit_user.php?show&user='.$cus_id.'&pass='.$pass.'&per=admin">รายละเอียด</a></td><td><a href="page.php?search='.$registration.'">เพิ่ม</a></td>';
   echo '</tr>';
-}
+  }
 }
 ?>
 

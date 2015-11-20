@@ -37,6 +37,7 @@ class db
 		$q = $conn->prepare($sql);
 		$q->bind_param("s", $_SESSION["regis"]);
 		$q->execute();
+
 		$q->bind_result($data,$day);
 		$i=0;
 		while ($q->fetch()) {
@@ -44,14 +45,18 @@ class db
 		$ar[$i]=$day;
 		$i++;
 		}
+		$ar=isset($ar)?$ar:'';
+		$da=isset($da)?$da:'';
 		$this->date=$ar[count($ar)-1];
-		return $da[count($da)-1];
+
+		return isset($da[count($da)-1])?$da:'';
 	}
 	public function updatecar($reg=''){
 				include "../connect.php";
 				$sql = "SELECT * FROM checkcar WHERE registration='$reg'";
 				$res = mysqli_query($conn,$sql);
 				$i = 0;
+
 				
 				while ($row = mysqli_fetch_assoc($res)) {
 				$ar[$i] = $row['date_'];
@@ -193,7 +198,7 @@ $_SESSION['mile']=((int)$op->mile())+10000;
       		
       
 
-
+$da = isset($da)?$da:'';
 
 
 ?>
