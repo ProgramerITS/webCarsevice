@@ -413,7 +413,12 @@ $sql = "SELECT date_, mile_late ,registration,check_id,countday FROM checkcar WH
     });
   });
   </script>
-
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>@copyright 2015 By RMTUSB ITS25641N</p>
+</footer>
 </body>
 </html>
 <?php } else {

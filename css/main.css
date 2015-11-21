@@ -157,3 +157,22 @@
       margin: 25px 0;
     }
   }
+
+footer{
+background-color:#111111;
+position: static;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 0%;
+}
+ footer p{
+    color:#fff;
+}
+  footer .glyphicon {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #CC0000;
+    width: auto;
+    height: 0%;
+}

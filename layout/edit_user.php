@@ -90,7 +90,7 @@ include "../connect.php";
   
   while ($qr->fetch()) {
   if($per!='admin'){
-  echo '<tr>';
+  echo '<tr class="info">';
   echo '<td>'.$cus_id.'</td><td>'.$cus_name.'</td><td>'.$tel.'</td><td>'.$registration.'</td><td><a href="./edit_user.php?show&user='.$cus_id.'&pass='.$pass.'&per=admin">รายละเอียด</a></td><td><a href="page.php?search='.$registration.'">เพิ่ม</a></td>';
   echo '</tr>';
   }
