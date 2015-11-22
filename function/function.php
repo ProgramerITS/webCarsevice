@@ -48,8 +48,7 @@ class db
 		}
 		$ar=isset($ar)?$ar:'';
 		$da=isset($da)?$da:'';
-		$this->date=$ar[count($ar)-1];
-
+		// $this->date=$ar[count($ar)-1];
 		return isset($da[count($da)-1])?$da:'';
 	}
 	public function updatecar($reg=''){

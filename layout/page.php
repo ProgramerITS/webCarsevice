@@ -20,7 +20,12 @@ if (isset($see["name"])) {
 <!DOCTYPE html>
 <html lang="en"  ng-app="ui.bootstrap.demo">
 <head>
-  
+<link rel="icon" href="../img/car2.ico" type="image/x-icon">
+<link href="../img/car2.ico" rel="favicon" />
+<link href="../img/car2.ico" rel="shortcut icon" />
+
+
+
   <title>Honda Anticipate</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,6 +36,8 @@ if (isset($see["name"])) {
   <script src="../js/date.js"></script>
   <script src="../js/new_js/angular-animate.js"></script>
   <script src="../js/new_js/ui-bootstrap-tpls-0.14.3.js"></script>
+
+
 
 
   
@@ -137,7 +144,7 @@ $_SESSION['countdate'] = isset($_SESSION['countdate'])?$_SESSION['countdate']:''
      
        //echo $sql;
    
-      print_r($op->ar);
+      // print_r($op->ar);
      echo'
       <h2>ตรวจเช็คสภาพครั้งต่อไป</h2>
       <h4><strong>วันที่ :</strong> '.DateDiffP("$date1", $nextd).'</h4>
@@ -340,9 +347,9 @@ $re = mysqli_query($conn, $ssql);
 <?php 
 if($_SESSION['per']!='admin'){
 echo '<div class="container-fluid"><div class="row">
-  <BR><BR><BR><BR><BR>
+  
 
-  <BR><div id="services" class="container-fluid"><BR>
+  <div id="services" class="container-fluid">
 </div>
 </div>
 
