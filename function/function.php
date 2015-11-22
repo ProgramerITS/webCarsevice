@@ -22,6 +22,7 @@
 
 class db
 {
+	public $ar;
 	public $date;
 	function __construct()
 	{
@@ -63,15 +64,22 @@ class db
 				
 				if($i>0){
 				$d = (int)DateDiff($ar[$i],$ar[$i-1]);
+				$this->ar[$i]=$d;
 				$a = $ar[$i];
-				if($d<0){
-				$d=$d*-1;
-				}
-				// echo $d;
+				
+				//echo $d;
 				mysqli_query($conn,"UPDATE checkcar SET countday='$d' WHERE registration='$reg' AND date_='$a'");
+				 // mysqli_query($conn,"UPDATE checkcar SET countday='33' WHERE registration='ฮฉย-360' AND date_='2015-11-30'");
+				}else{
+					$a = $ar[$i];
+					mysqli_query($conn,"UPDATE checkcar SET countday='0' WHERE registration='$reg' AND date_='$a'");
 				}
 				$i++;
-}}
+
+}
+
+
+}
 
 }
 
@@ -121,9 +129,7 @@ $_SESSION['date3'] = $ar[1];
 
 $registration=$_SESSION['regis'];
 
-//<-update car
-	$op->updatecar($registration);
-//->
+
 if($_SESSION['per']!='admin'){	
 $sql = "SELECT countday,check_id FROM checkcar WHERE registration='$registration'";
 $q = $conn->prepare($sql);

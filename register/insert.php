@@ -32,8 +32,8 @@ $q = $conn->prepare($sql);
 $q->bind_param("ssss",$data['reg'],$data['car'],$data['username'],date('Y-m-d'));
 
 $ck1 = $q->execute();
-$sql = "INSERT INTO checkcar (registration,date_)
- VALUES (?,?)";
+$sql = "INSERT INTO checkcar (registration,date_,countday)
+ VALUES (?,?,'0')";
 $r = $conn->prepare($sql);
 $r->bind_param("ss",$data['reg'],date('Y-m-d'));
 

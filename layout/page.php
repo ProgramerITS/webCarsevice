@@ -10,7 +10,13 @@ if (isset($see["name"])) {
 
 	$dateclu = isset($_POST["dateclu"]) ? $_POST["dateclu"] : 'null';
 
-	?>
+	
+
+//<-update car
+  $op->updatecar($registration);
+//->
+
+  ?>
 <!DOCTYPE html>
 <html lang="en"  ng-app="ui.bootstrap.demo">
 <head>
@@ -23,16 +29,16 @@ if (isset($see["name"])) {
   <link rel="stylesheet" href="../css/main.css">
   <script src="../js/angular.min.js"></script>
   <script src="../js/date.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
-  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+  <script src="../js/new_js/angular-animate.js"></script>
+  <script src="../js/new_js/ui-bootstrap-tpls-0.14.3.js"></script>
 
 
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="../js/new_js/jquery.min.js"></script>
+  <script src="../js/new_js/bootstrap.min.js"></script>
 
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="../js/new_js/jquery-1.10.2.js"></script>
+  <script src="../js/new_js/jquery-ui.js"></script>
 </head>
 <style>
 .videoWrapper {
@@ -131,7 +137,7 @@ $_SESSION['countdate'] = isset($_SESSION['countdate'])?$_SESSION['countdate']:''
      
        //echo $sql;
    
-
+      print_r($op->ar);
      echo'
       <h2>ตรวจเช็คสภาพครั้งต่อไป</h2>
       <h4><strong>วันที่ :</strong> '.DateDiffP("$date1", $nextd).'</h4>
