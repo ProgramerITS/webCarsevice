@@ -17,8 +17,8 @@
 
   <form class="form-signin" action="insert.php" method="POST">
     <h1 class="form-signin-heading text-muted">สมัครสมาชิก</h1>
-    <input type="email" class="form-control" placeholder="ชื่อผู้ใช้งาน" name="username" id="email" maxlength="20" required autofocus>
-    <input type="password" class="form-control" placeholder="รหัสผ่าน" name="pass" id="pass" maxlength="20" required autofocus>
+    <input type="email" class="form-control" placeholder="อีเมล" name="username" id="email" maxlength="60" required autofocus>
+    <input type="password" class="form-control" placeholder="รหัสผ่าน 4-20" name="pass" id="pass" maxlength="20" minlength="4" required autofocus>
     <input type="text" class="form-control" placeholder="ชื่อ - นามสกุล" name="name" id="name" maxlength="30" required autofocus>
   
     <input type="date" class="form-control" name="birthday" id="birthday" placeholder="วันเกิด 1/11/2015" required autofocus>
@@ -31,7 +31,7 @@
   
     <textarea name="address" class="form-control" placeholder="ที่อยู่" id="address" cols="30" rows="3" maxlength="50" required autofocus></textarea>
     <br>
-    <input type="text" maxlength="7" minlength="6" class="form-control" placeholder="ป้ายทะเบียน" name="carid" id="carid" maxlength="30" required autofocus><br>
+    <input type="text" maxlength="7" minlength="6" class="form-control" placeholder="ป้ายทะเบียน" name="carid" id="carid" required autofocus><br>
     <select name="car" class="form-control" >ดูทุกรุ่นหลัก</option>
 <option value="Accord" >รุ่น Accord    </option>
 <option value="Accord_Hybrid" >รุ่น Accord Hybrid    </option>
@@ -60,11 +60,5 @@
   </form>
 </div>
 </div>
-
-   
-
-
-
-
 </body>
 </html>

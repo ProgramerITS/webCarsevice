@@ -48,7 +48,8 @@ class db
 		}
 		$ar=isset($ar)?$ar:'';
 		$da=isset($da)?$da:'';
-		// $this->date=$ar[count($ar)-1];
+		$this->date=$ar[count($ar)-1];
+
 		return isset($da[count($da)-1])?$da:'';
 	}
 	public function updatecar($reg=''){
@@ -167,8 +168,8 @@ function DateDiff($strDate1, $strDate2) {
 	return intval((strtotime($strDate1) - strtotime($strDate2)) / (60 * 60 * 24)); // 1 day = 60*60*24
 }
 
-
-$_SESSION['mile']=((int)$op->mile())+10000;
+$ar_data = $op->mile();
+$_SESSION['mile']=$ar_data[count($ar_data)-1]+10000;
 
     	$mile=$_SESSION['mile'];
       	$mony = 0;

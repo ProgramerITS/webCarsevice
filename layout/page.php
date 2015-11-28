@@ -20,12 +20,7 @@ if (isset($see["name"])) {
 <!DOCTYPE html>
 <html lang="en"  ng-app="ui.bootstrap.demo">
 <head>
-<link rel="icon" href="../img/car2.ico" type="image/x-icon">
-<link href="../img/car2.ico" rel="favicon" />
-<link href="../img/car2.ico" rel="shortcut icon" />
-
-
-
+  
   <title>Honda Anticipate</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,8 +31,6 @@ if (isset($see["name"])) {
   <script src="../js/date.js"></script>
   <script src="../js/new_js/angular-animate.js"></script>
   <script src="../js/new_js/ui-bootstrap-tpls-0.14.3.js"></script>
-
-
 
 
   
@@ -144,13 +137,14 @@ $_SESSION['countdate'] = isset($_SESSION['countdate'])?$_SESSION['countdate']:''
      
        //echo $sql;
    
-      // print_r($op->ar);
+     // print_r($op->ar);
+   $_SESSION['DateDiffP'] = DateDiffP("$date1", $nextd);
      echo'
       <h2>ตรวจเช็คสภาพครั้งต่อไป</h2>
-      <h4><strong>วันที่ :</strong> '.DateDiffP("$date1", $nextd).'</h4>
+      <h4><strong>ประมาณวันที่ :</strong> '.DateDiffP("$date1", $nextd).'</h4>
       <h5><strong>อีกประมาณ :</strong>'.$_SESSION['countdate'].'วัน</h5>
       <div class="col-sm-8 text-right">
-  จำนวน '.$sum.' รายการ ราคา '.$mony.' บาท
+  <h5><strong>โดยมีค่าใช้จ่ายล่วงหน้าโดยประมาณ</strong></h5>จำนวน '.$sum.' รายการ ราคา '.$mony.' บาท
 
   <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">รายละเอียด</button>
 
@@ -174,7 +168,7 @@ $_SESSION['countdate'] = isset($_SESSION['countdate'])?$_SESSION['countdate']:''
         </tr>
     </thead>
     <tbody>';
-
+    echo "ครั้งต่อไป ". $_SESSION['mile'] ." กิโล";
       $mile=$_SESSION['mile'];
         //$mony = 0;
         if($mile%20000==1){
@@ -223,8 +217,10 @@ $_SESSION['countdate'] = isset($_SESSION['countdate'])?$_SESSION['countdate']:''
       echo "</tr><td class=\"text-right\">ราคารวม</td><td class=\"success\">$mony</td><td>บาท</td></tr>".'
     </tbody>
   </table>
+  *หมายเหตุ ราคาอาจเปลี่ยนแปลงได้ ราคานี้ยังไม่รวมค่าแรง
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href=\'../report/report2.php\'" >พิมพ์</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -347,9 +343,9 @@ $re = mysqli_query($conn, $ssql);
 <?php 
 if($_SESSION['per']!='admin'){
 echo '<div class="container-fluid"><div class="row">
-  
+  <BR><BR><BR><BR><BR>
 
-  <div id="services" class="container-fluid">
+  <BR><div id="services" class="container-fluid"><BR>
 </div>
 </div>
 
@@ -390,8 +386,6 @@ $sql = "SELECT date_, mile_late ,registration,check_id,countday FROM checkcar WH
          echo "<td>$registration<br></td>";
          echo "<td>$countday<br></td>";
        echo "</tr>";
-
-   
 }
 }
 	?>
@@ -402,10 +396,6 @@ $sql = "SELECT date_, mile_late ,registration,check_id,countday FROM checkcar WH
   </div>
 </div>
 </div>
-
-
-
-
 
 
   </div>
@@ -430,7 +420,8 @@ $sql = "SELECT date_, mile_late ,registration,check_id,countday FROM checkcar WH
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>@copyright 2015 By RMTUSB ITS25641N</p>
+  <p>@copyright 2015 By RMUTSB ITS25641N</p><br>
+  เว็บไซท์นี้จัดทำเพื่อการศึกษาเท่านั้น
 </footer>
 </body>
 </html>

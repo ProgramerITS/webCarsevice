@@ -39,7 +39,7 @@ include "../connect.php";
             <select name="option" class="form-control input-sm">
             <?php $chk = isset($_GET['option'])?$_GET['option']:'';?>
             <option value="cus_name" <?php if($chk =='cus_name'){echo 'selected';} ?>>name</option>
-            <option value="cus.cus_id"   <?php if($chk =='cus_id'){echo 'selected';} ?>>ID</option>
+            <option value="cus_id"<?php if($chk=='cus_id'){echo 'selected';} ?>>ID</option>
             <option value="tel"<?php if($chk=='tel'){echo 'selected';} ?>>tel</option>
             </select>
             </span>
@@ -73,7 +73,7 @@ include "../connect.php";
       </tr>
     </thead>
 <?php
-
+// Search
   $_SESSION['perv2']='admin';
   if(!empty($_GET['option'])&&!empty($_GET['search'])){
       $option = $_GET['option'];

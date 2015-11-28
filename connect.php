@@ -5,7 +5,7 @@ $config = array(
 	'host' => "127.0.0.1",
 	'user' => "root",
 	'pass' => "",
-	'dbconn' => "dbvdo09",
+	'dbconn' => "predictioncar",
 	'charset' => "utf8",
 
 );

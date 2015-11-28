@@ -27,7 +27,7 @@ session_start();
 	
 	<form class="form-signin" action="conlogin.php" method="POST" name="loginform" autocomplete="off">
 		<h1 class="form-signin-heading text-muted">ยินดีต้อนรับสู่ Honda Anticipate</h1>
-		<input type="text" class="form-control" placeholder="ชื่อผู้ใช้งาน" name="user" id="user" required autofocus>
+		<input type="text" class="form-control" placeholder="อีเมล" name="user" id="user" required autofocus>
 		<input type="password" class="form-control" placeholder="รหัสผ่าน" name="pass" id="pass"required>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">
 			เข้าสู่ระบบ
